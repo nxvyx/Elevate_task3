@@ -10,7 +10,7 @@ To perform an automated **vulnerability assessment** on a target system using **
 - **Operating System:** Kali Linux (VM)
 - **Target:** Metasploitable Virtual Machine (`[REDACTED_IP]`)
 - **Scan Type:** Full and Fast Scan
-- **Date of Scan:** Oct 24, 2021
+- **Date of Scan:** Oct 25,2025
 
 ---
 
