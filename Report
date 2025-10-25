@@ -1,0 +1,126 @@
+# Redacted OpenVAS Scan Report Content
+
+Summary
+This document reports on the results of an automatic security scan. The report first summarises the results found. Then, for each host, the report describes every issue found. Please consider the advice given in each description, in order to rectify the issue. Vendor security updates are not trusted. Overrides are on. When a result has an override, this report uses the threat of the override. Information on overrides is included in the report. Notes are included in the report. This report might not show details of all issues that were found. It only lists hosts that produced issues. Issues with the threat level "Log" are not shown. Issues with the threat level "Debug" are not shown. Issues with the threat level "False Positive" are not shown. Only results with a minimum QoD of 70 are shown. This report contains all 39 results selected by the filtering described above. Before filtering there were 326 results. All dates are displayed using the timezone "Coordinated Universal Time", which is abbreviated "UTC".
+
+* Scan started: Fri Oct 25 20:26:54 2021 UTC
+* Scan ended: Fri Oct 25 20:53:56 2021 UTC
+* Task: METASPLOITABLE
+
+Host Summary
+
+| Host | Start | End | High | Medium | Low | Log | False Positive |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| [REDACTED IP] | Oct 25, 20:26:54 | Oct 24, 20:53:56 | 9 | 28 | 2 | 0 | 0 |
+| Total: 1 | | | 9 | 28 | 2 | 0 | 0 |
+
+Host Authentications
+
+| Host | Protocol | Result | Port/User |
+| :--- | :--- | :--- | :--- |
+| [REDACTED IP] | SMB | Success | Protocol SMB, Port 445, User |
+
+Results per Host
+* Host [REDACTED IP]
+* Scanning of this host started at: Sun Feb 23 18:22:54 2021 UTC
+* Number of results: 39
+
+Port Summary for Host [REDACTED IP]
+
+| Service (Port) | Threat Level |
+| :--- | :--- |
+| 80/tcp | High |
+| 5432/tcp | High |
+| 22/tcp | High |
+| 25/tcp | Medium |
+| 3306/tcp | High |
+| general/tcp | High |
+| 23/tcp | Medium |
+| 3632/tcp | High |
+
+
+Security Issues for Host [REDACTED IP]
+
+#High (CVSS: 10.0) - NVT: OS End Of Life Detection
+* Summary: The Operating System on the remote host has reached the end of life and should not be used anymore.
+* Vulnerability Detection Result: The "Ubuntu" Operating System on the remote host has reached the end of life.
+    * Installed version: cpe:/o:canonical: ubuntu\_linux:8.04
+    * EOL date: 2013-05-09
+* Solution: Mitigation - Update OS.
+
+#High (CVSS: 10.0) - NVT: TWiki XSS and Command Execution Vulnerabilities
+* Product detection result: cpe:/a:twiki:twiki: 01.Feb.2003
+* Summary: The host is running TWiki and is prone to Cross-Site Scripting (XSS) and Command Execution Vulnerabilities.
+* Impact: Successful exploitation could allow execution of arbitrary script code or commands.
+* Solution: VendorFix - Upgrade to version 4.2.4 or later.
+
+
+* Affected Software/OS (TWiki): TWiki version prior to 4.2.4.
+* Vulnerability Insight: Flaws are due to improper sanitization of `%URLPARAM{}` and `$%SEARCH{}$` variables.
+* References (TWiki XSS): CVE-2008-5304, CVE-2008-5305.
+
+# High (CVSS: 9.3) - NVT: DistCC Remote Code Execution Vulnerability
+* Port: 3632/tcp
+* Summary: DistCC 2.x allows remote attackers to execute arbitrary commands via compilation jobs when not configured to restrict access.
+* Vulnerability Detection Result: It was possible to execute the `"id"` command, resulting in `uid=1(daemon) gid=1(daemon)`.
+* Impact: A malicious client could execute arbitrary commands on the server.
+* Solution: VendorFix - Vendor updates are available.
+
+
+* References (DistCC): CVE-2004-2687.
+
+# High (CVSS: 9.0) - NVT: MySQL/MariaDB weak password
+* Port: 3306/tcp
+* Summary: It was possible to login into the remote MySQL as root using weak credentials.
+* Vulnerability Detection Result: It was possible to login as root with password **"[REDACTED PASSWORD]"**.
+* Solution: Mitigation - Change the password as soon as possible.
+
+#### High (CVSS: 9.0) - NVT: PostgreSQL weak password
+* **Port**: 5432/tcp
+* **Summary**: It was possible to login into the remote PostgreSQL as user postgres using weak credentials.
+* **Vulnerability Detection Result**: It was possible to login as user postgres with password **"[REDACTED PASSWORD]"**.
+* **Solution**: Mitigation - Change the password as soon as possible.
+
+
+# High (CVSS: 7.8) - NVT: Apache httpd Web Server Range Header Denial of Service Vulnerability
+* Port: 80/tcp
+* Summary: This host is running Apache httpd web server and is prone to denial of service vulnerability.
+* Impact: Successful exploitation will let the remote unauthenticated attackers to cause a denial of service.
+* Affected Software/OS: Apache 1.3.x, 2.0.x through 2.0.64 and 2.2.x through 2.2.19.
+* References: CVE-2011-3192.
+
+
+#High (CVSS: 7.5) - NVT: Tiki Wiki CMS Groupware < 4.2 Multiple Unspecified Vulnerabilities
+* Port: 80/tcp
+* Summary: Prone to multiple unspecified vulnerabilities, including an SQL-injection, authentication-bypass, and other unspecified vulnerabilities.
+* Installed version: 1.9.5
+* Fixed version: 4.2
+* Solution: VendorFix - Upgrade to version 4.2 or later.
+
+
+# High (CVSS: 7.5) - NVT: phpinfo() output Reporting
+* Port: 80/tcp
+* Summary: A file calling the `phpinfo()` statement was left in the webserver directory, which can disclose potentially sensitive information.
+* Vulnerability Detection Result: The file found is: `http://[REDACTED IP]/phpinfo.php`.
+* Impact: Information gathered can include the username of the user running the PHP process, **the IP address of the host**, the web server version, and the system version.
+* Solution: Workaround - Delete the listed files or restrict access to them.
+
+# High (CVSS: 7.5) - NVT: SSH Brute Force Logins With Default Credentials Reporting
+* Port: 22/tcp
+* Summary: It was possible to login into the remote SSH server using default credentials.
+* Vulnerability Detection Result: It was possible to login with the credentials:
+    * msfadmin: [REDACTED PASSWORD]
+    * user: [REDACTED PASSWORD]
+* Solution: Mitigation - Change the password as soon as possible.
+
+
+The rest of the report details 8 additional vulnerabilities found, including:
+
+* TWiki Cross-Site Request Forgery Vulnerability (Medium, CVSS: 6.8)
+* Multiple Vendors STARTTLS Implementation Plaintext Arbitrary Command Injection (Medium, CVSS: 6.8) on port 25/tcp
+* SSL/TLS: OpenSSL CCS Man In the Middle Security Bypass Vulnerability (Medium, CVSS: 6.8) on port 5432/tcp
+* Tiki Wiki CMS Groupware < 17.2 SQL Injection Vulnerability (Medium, CVSS: 6.5)
+* TWiki Cross-Site Request Forgery Vulnerability (Medium, CVSS: 6.0)
+* HTTP Debugging Methods (TRACE/TRACK) Enabled (Medium, CVSS: 5.8) on port 80/tcp
+* SSL/TLS: Certificate Expired (Medium, CVSS: 5.0) on port 25/tcp (expired 2010-04-16)
+* SSL/TLS: Certificate Expired (Medium, CVSS: 5.0) on port 5432/tcp (expired 2010-04-16)
